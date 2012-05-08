@@ -1,27 +1,26 @@
 //
-//  STStoriesViewController.m
+//  STLatestViewController.m
 //  Storeys
 //
-//  Created by Justin Cheng on 5/7/12.
+//  Created by Justin Cheng on 5/8/12.
 //  Copyright (c) 2012 colorforest. All rights reserved.
 //
 
-#import "STStoriesViewController.h"
-#import "STSingleStoryViewController.h"
+#import "STLatestViewController.h"
 #import "STStory.h"
-#import "PullToRefreshView.h"
-#import "Constants.h"
 #import "SBJson.h"
+#import "Constants.h"
+#import "PullToRefreshView.h"
 
-@interface STStoriesViewController ()
+@interface STLatestViewController ()
 
 @end
 
-@implementation STStoriesViewController {
+@implementation STLatestViewController {
     PullToRefreshView* pull;
 }
 
-@synthesize stories;
+@synthesize latests;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -44,6 +43,8 @@
     pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [pull setDelegate:(id)self];
     [self.tableView addSubview:pull];
+    
+    [self reloadTableData];
 }
 
 - (void)viewDidUnload
@@ -62,18 +63,20 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.stories count];
+    // Return the number of rows in the section.
+    return [[self latests] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StoryCell"];
-    STStory* story = [self.stories objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LatestCell"];
+    STStory* story = [self.latests objectAtIndex:indexPath.row];
     cell.textLabel.text = story.name;
     
     NSString* text = story.text;
@@ -122,16 +125,6 @@
 }
 */
 
-- (void)prepareForSegue:(UIStoryboardSegue* )segue sender:(id)sender
-{
-    NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
-    if ([segue.identifier isEqualToString:@"StoriesToSingleStorySegue"]) {
-        NSLog(@"Hello Worldy!");
-        STSingleStoryViewController* vc = [segue destinationViewController];
-        vc.story = [self.stories objectAtIndex:indexPath.row];
-    }
-}
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -154,13 +147,13 @@
 
 -(void) reloadTableData
 {
-    NSLog(@"Reloading!!!");
+    NSLog(@"Reloading Latest!!!");
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:StoreysURLRoots]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:StoreysURLLatest]];
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *json_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
     NSArray *statuses = [json_string JSONValue];
-    stories = [NSMutableArray arrayWithCapacity:[statuses count]];
+    latests = [NSMutableArray arrayWithCapacity:[statuses count]];
     for (NSDictionary *status in statuses)
     {
         STStory *story = [[STStory alloc] init];
@@ -168,7 +161,7 @@
         story.storyId = [(NSNumber*)[status objectForKey:@"id"] intValue];
         story.text = @"";
         story.rating = 4;
-        [stories addObject:story];
+        [latests addObject:story];
         NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
     }
     

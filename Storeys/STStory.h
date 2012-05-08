@@ -13,5 +13,6 @@
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* text;
 @property (nonatomic, assign) int rating;
+@property (nonatomic, assign) int storyId;
 
 @end

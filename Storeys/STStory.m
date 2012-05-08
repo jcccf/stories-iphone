@@ -13,5 +13,6 @@
 @synthesize name;
 @synthesize text;
 @synthesize rating;
+@synthesize storyId;
 
 @end

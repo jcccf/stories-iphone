@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "STStory.h"
+@class STStory;
 
 @interface STSingleStoryViewController : UIViewController
 

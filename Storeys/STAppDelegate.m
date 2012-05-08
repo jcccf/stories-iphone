@@ -7,9 +7,7 @@
 //
 
 #import "STAppDelegate.h"
-#import "STStory.h"
 #import "STStoriesViewController.h"
-#import "SBJson.h"
 
 @implementation STAppDelegate {
     NSMutableArray *stories;
@@ -18,40 +16,13 @@
 @synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    stories = [NSMutableArray arrayWithCapacity:20];
-    STStory *story = [[STStory alloc] init];
-    story.name = @"Hello world";
-    story.text = @"Texty!";
-    story.rating = 4;
-    [stories addObject:story];
-    
-//    // Prepare URL request to download statuses from Twitter
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://twitter.com/statuses/public_timeline.json"]];
-//    
-//    // Perform request and get JSON back as a NSData object
-//    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-//    
-//    // Get JSON as a NSString from NSData response
-//    NSString *json_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-//    
-//    // parse the JSON response into an object
-//    // Here we're using NSArray since we're parsing an array of JSON status objects
-//    NSArray *statuses = [json_string JSONValue];
-//    
-//    // Each element in statuses is a single status
-//    // represented as a NSDictionary
-//    for (NSDictionary *status in statuses)
-//    {
-//        // You can retrieve individual values using objectForKey on the status NSDictionary
-//        // This will print the tweet and username to the console
-//        NSLog(@"%@ - %@", [status objectForKey:@"text"], [[status objectForKey:@"user"] objectForKey:@"screen_name"]);
-//    }
-    
+{    
     UITabBarController *tabBarController = (UITabBarController*) self.window.rootViewController;
     UINavigationController *navigationController = [[tabBarController viewControllers] objectAtIndex:0];
     STStoriesViewController *storiesViewController = [[navigationController viewControllers] objectAtIndex:0];
-    storiesViewController.stories = stories;
+    
+    [storiesViewController reloadTableData];
+    
     return YES;
 }
 							

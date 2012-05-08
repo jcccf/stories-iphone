@@ -14,7 +14,6 @@
 		10622DE8155896E000FDE8FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10622DE7155896E000FDE8FD /* main.m */; };
 		10622DEC155896E000FDE8FD /* STAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10622DEB155896E000FDE8FD /* STAppDelegate.m */; };
 		10622DEF155896E000FDE8FD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10622DED155896E000FDE8FD /* MainStoryboard.storyboard */; };
-		10622DF2155896E000FDE8FD /* STViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10622DF1155896E000FDE8FD /* STViewController.m */; };
 		10622DFA155896E100FDE8FD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10622DF9155896E100FDE8FD /* SenTestingKit.framework */; };
 		10622DFB155896E100FDE8FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10622DDB155896E000FDE8FD /* UIKit.framework */; };
 		10622DFC155896E100FDE8FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10622DDD155896E000FDE8FD /* Foundation.framework */; };
@@ -39,6 +38,11 @@
 		10622E441558B1B000FDE8FD /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10622E401558B1B000FDE8FD /* arrow@2x.png */; };
 		10622E451558B1B000FDE8FD /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10622E421558B1B000FDE8FD /* PullToRefreshView.m */; };
 		10622E481558B26500FDE8FD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10622E471558B26400FDE8FD /* QuartzCore.framework */; };
+		1091CB7915596EEC005BF9CE /* STLatestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1091CB7815596EEC005BF9CE /* STLatestViewController.m */; };
+		1091CB7F1559717D005BF9CE /* 64-zap.png in Resources */ = {isa = PBXBuildFile; fileRef = 1091CB7B1559717C005BF9CE /* 64-zap.png */; };
+		1091CB801559717D005BF9CE /* 64-zap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1091CB7C1559717C005BF9CE /* 64-zap@2x.png */; };
+		1091CB811559717D005BF9CE /* 96-book.png in Resources */ = {isa = PBXBuildFile; fileRef = 1091CB7D1559717D005BF9CE /* 96-book.png */; };
+		1091CB821559717D005BF9CE /* 96-book@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1091CB7E1559717D005BF9CE /* 96-book@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,8 +67,6 @@
 		10622DEA155896E000FDE8FD /* STAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAppDelegate.h; sourceTree = "<group>"; };
 		10622DEB155896E000FDE8FD /* STAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STAppDelegate.m; sourceTree = "<group>"; };
 		10622DEE155896E000FDE8FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		10622DF0155896E000FDE8FD /* STViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STViewController.h; sourceTree = "<group>"; };
-		10622DF1155896E000FDE8FD /* STViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STViewController.m; sourceTree = "<group>"; };
 		10622DF8155896E100FDE8FD /* StoreysTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoreysTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10622DF9155896E100FDE8FD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		10622E01155896E100FDE8FD /* StoreysTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StoreysTests-Info.plist"; sourceTree = "<group>"; };
@@ -107,6 +109,13 @@
 		10622E411558B1B000FDE8FD /* PullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshView.h; sourceTree = "<group>"; };
 		10622E421558B1B000FDE8FD /* PullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshView.m; sourceTree = "<group>"; };
 		10622E471558B26400FDE8FD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1091CB7715596EEB005BF9CE /* STLatestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLatestViewController.h; sourceTree = "<group>"; };
+		1091CB7815596EEC005BF9CE /* STLatestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLatestViewController.m; sourceTree = "<group>"; };
+		1091CB7B1559717C005BF9CE /* 64-zap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "64-zap.png"; sourceTree = "<group>"; };
+		1091CB7C1559717C005BF9CE /* 64-zap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "64-zap@2x.png"; sourceTree = "<group>"; };
+		1091CB7D1559717D005BF9CE /* 96-book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "96-book.png"; sourceTree = "<group>"; };
+		1091CB7E1559717D005BF9CE /* 96-book@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "96-book@2x.png"; sourceTree = "<group>"; };
+		1091CB84155983B3005BF9CE /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,19 +177,21 @@
 		10622DE1155896E000FDE8FD /* Storeys */ = {
 			isa = PBXGroup;
 			children = (
-				10622E491558B41300FDE8FD /* PullToRefreshView */,
-				10622E3E1558AF5E00FDE8FD /* SBJson */,
 				10622DEA155896E000FDE8FD /* STAppDelegate.h */,
 				10622DEB155896E000FDE8FD /* STAppDelegate.m */,
 				10622DED155896E000FDE8FD /* MainStoryboard.storyboard */,
+				1091CB7715596EEB005BF9CE /* STLatestViewController.h */,
+				1091CB7815596EEC005BF9CE /* STLatestViewController.m */,
+				10622E101558997600FDE8FD /* STStoriesViewController.h */,
+				10622E111558997600FDE8FD /* STStoriesViewController.m */,
 				10622E161558A61300FDE8FD /* STSingleStoryViewController.h */,
 				10622E171558A61300FDE8FD /* STSingleStoryViewController.m */,
-				10622E101558997600FDE8FD /* STStoriesViewController.h */,
 				10622E13155899DB00FDE8FD /* STStory.h */,
 				10622E14155899DB00FDE8FD /* STStory.m */,
-				10622E111558997600FDE8FD /* STStoriesViewController.m */,
-				10622DF0155896E000FDE8FD /* STViewController.h */,
-				10622DF1155896E000FDE8FD /* STViewController.m */,
+				1091CB84155983B3005BF9CE /* Constants.h */,
+				1091CB8315597189005BF9CE /* Icons */,
+				10622E491558B41300FDE8FD /* PullToRefreshView */,
+				10622E3E1558AF5E00FDE8FD /* SBJson */,
 				10622DE2155896E000FDE8FD /* Supporting Files */,
 			);
 			path = Storeys;
@@ -259,6 +270,17 @@
 			name = PullToRefreshView;
 			sourceTree = "<group>";
 		};
+		1091CB8315597189005BF9CE /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				1091CB7B1559717C005BF9CE /* 64-zap.png */,
+				1091CB7C1559717C005BF9CE /* 64-zap@2x.png */,
+				1091CB7D1559717D005BF9CE /* 96-book.png */,
+				1091CB7E1559717D005BF9CE /* 96-book@2x.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -335,6 +357,10 @@
 				10622DEF155896E000FDE8FD /* MainStoryboard.storyboard in Resources */,
 				10622E431558B1B000FDE8FD /* arrow.png in Resources */,
 				10622E441558B1B000FDE8FD /* arrow@2x.png in Resources */,
+				1091CB7F1559717D005BF9CE /* 64-zap.png in Resources */,
+				1091CB801559717D005BF9CE /* 64-zap@2x.png in Resources */,
+				1091CB811559717D005BF9CE /* 96-book.png in Resources */,
+				1091CB821559717D005BF9CE /* 96-book@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +397,6 @@
 			files = (
 				10622DE8155896E000FDE8FD /* main.m in Sources */,
 				10622DEC155896E000FDE8FD /* STAppDelegate.m in Sources */,
-				10622DF2155896E000FDE8FD /* STViewController.m in Sources */,
 				10622E121558997600FDE8FD /* STStoriesViewController.m in Sources */,
 				10622E15155899DB00FDE8FD /* STStory.m in Sources */,
 				10622E181558A61300FDE8FD /* STSingleStoryViewController.m in Sources */,
@@ -388,6 +413,7 @@
 				10622E3C1558AF5500FDE8FD /* SBJsonUTF8Stream.m in Sources */,
 				10622E3D1558AF5500FDE8FD /* SBJsonWriter.m in Sources */,
 				10622E451558B1B000FDE8FD /* PullToRefreshView.m in Sources */,
+				1091CB7915596EEC005BF9CE /* STLatestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +583,7 @@
 				10622E0C155896E100FDE8FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		10622E0D155896E100FDE8FD /* Build configuration list for PBXNativeTarget "StoreysTests" */ = {
 			isa = XCConfigurationList;
@@ -565,6 +592,7 @@
 				10622E0F155896E100FDE8FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

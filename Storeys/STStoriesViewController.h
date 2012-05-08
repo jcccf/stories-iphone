@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSMutableArray *stories;
 
+- (void) reloadTableData;
+
 @end
