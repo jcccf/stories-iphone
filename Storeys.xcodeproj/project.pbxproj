@@ -306,7 +306,7 @@
 			attributes = {
 				CLASSPREFIX = ST;
 				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = "Cornell University";
+				ORGANIZATIONNAME = colorforest;
 			};
 			buildConfigurationList = 10622DD1155896DF00FDE8FD /* Build configuration list for PBXProject "Storeys" */;
 			compatibilityVersion = "Xcode 3.2";
