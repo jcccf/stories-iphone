@@ -77,7 +77,10 @@
     [htmlFragments addObject:@"<div style=\"font-family:'Helvetica Neue';\">"];
     for (NSDictionary *status in statuses)
     {
-        [htmlFragments addObject:@"<p>"];
+        if ([(NSNumber*)[status objectForKey:@"id"] intValue] == story.storyId)
+            [htmlFragments addObject:@"<p style=\"font-weight: bold;\">"];
+        else
+            [htmlFragments addObject:@"<p>"];
         [htmlFragments addObject:[status objectForKey:@"line"]];
         [htmlFragments addObject:@"</p>"];
         NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
