@@ -7,10 +7,11 @@
 //
 
 #import "STLatestViewController.h"
+#import "STSingleStoryViewController.h"
 #import "STStory.h"
 #import "SBJson.h"
-#import "Constants.h"
 #import "PullToRefreshView.h"
+#import "Constants.h"
 
 @interface STLatestViewController ()
 
@@ -125,6 +126,16 @@
 }
 */
 
+- (void)prepareForSegue:(UIStoryboardSegue* )segue sender:(id)sender
+{
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
+    if ([segue.identifier isEqualToString:@"LatestToSingleStorySegue"]) {
+        NSLog(@"Seguing from Latest to SingleStory!");
+        STSingleStoryViewController* vc = [segue destinationViewController];
+        vc.story = [self.latests objectAtIndex:indexPath.row];
+    }
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -153,7 +164,8 @@
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *json_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
     NSArray *statuses = [json_string JSONValue];
-    latests = [NSMutableArray arrayWithCapacity:[statuses count]];
+    
+    NSMutableArray* new_latests = [NSMutableArray arrayWithCapacity:[statuses count]];
     for (NSDictionary *status in statuses)
     {
         STStory *story = [[STStory alloc] init];
@@ -161,10 +173,11 @@
         story.storyId = [(NSNumber*)[status objectForKey:@"id"] intValue];
         story.text = @"";
         story.rating = 4;
-        [latests addObject:story];
+        [new_latests addObject:story];
         NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
     }
     
+    latests = new_latests;
     [self.tableView reloadData];
     [pull finishedLoading];
 }
