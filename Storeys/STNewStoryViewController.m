@@ -33,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.storyTextView becomeFirstResponder];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -71,6 +72,12 @@
 
 - (IBAction)done:(id)sender
 {   
+    
+    if ([self.storyTextView.text length] < 10) {
+        [[[UIAlertView alloc] initWithTitle:@"Hmm..." message:@"Your story is a little too short. Try writing a little more?" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        return;
+    }
+    
     // Disable Done and Cancel to prevent multiple submissions
     [doneButton setEnabled:NO];
     [cancelButton setEnabled:NO];
