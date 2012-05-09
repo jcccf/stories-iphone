@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STNewStoryViewController.h"
 
-@interface STStoriesViewController : UITableViewController
+@interface STStoriesViewController : UITableViewController <STNewStoryViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *stories;
 

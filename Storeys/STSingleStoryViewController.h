@@ -11,7 +11,7 @@
 
 @interface STSingleStoryViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIWebView* webView;
+@property (nonatomic, strong) IBOutlet UIWebView* webView;
 
 @property (strong, nonatomic) STStory* story;
 

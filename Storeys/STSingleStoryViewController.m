@@ -8,9 +8,9 @@
 
 #import "STSingleStoryViewController.h"
 #import "STStory.h"
-#import "SBJson.h"
-#import "Constants.h"
 #import "PullToRefreshView.h"
+#import "AFStoreysClient.h"
+#import "Constants.h"
 
 @interface STSingleStoryViewController ()
 
@@ -18,6 +18,7 @@
 
 @implementation STSingleStoryViewController {
     UIScrollView* currentScrollView;
+    PullToRefreshView* pull;
 }
 
 @synthesize webView;
@@ -45,7 +46,7 @@
             currentScrollView.delegate = (id) self;
         }
     }
-    PullToRefreshView *pull = [[PullToRefreshView alloc] initWithScrollView:currentScrollView];
+    pull = [[PullToRefreshView alloc] initWithScrollView:currentScrollView];
     [pull setDelegate:(id)self];
     pull.tag = 998;
     [currentScrollView addSubview:pull];
@@ -57,7 +58,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -68,26 +68,27 @@
 - (void) reloadStory
 {
     NSLog(@"Reloading Story!");
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:StoreysURLRandomStory(story.storyId)]];
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *json_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-    NSArray *statuses = [json_string JSONValue];
-    NSMutableArray* htmlFragments = [[NSMutableArray alloc] init];
-    [htmlFragments addObject:@"<div style=\"font-family:'Helvetica Neue';\">"];
-    for (NSDictionary *status in statuses)
-    {
-        if ([(NSNumber*)[status objectForKey:@"id"] intValue] == story.storyId)
-            [htmlFragments addObject:@"<p style=\"font-weight: bold;\">"];
-        else
-            [htmlFragments addObject:@"<p>"];
-        [htmlFragments addObject:[status objectForKey:@"line"]];
-        [htmlFragments addObject:@"</p>"];
-        NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
-    }
-    [htmlFragments addObject:@"</div>"];
-    NSString* htmlString = [htmlFragments componentsJoinedByString: @""];
-	[webView loadHTMLString:htmlString baseURL:[NSURL URLWithString:@"http://storeys.clr3.com"]];
+    [[AFStoreysClient sharedClient] getPath:StoreysURLRandomStory(story.storyId) parameters:nil
+        success:^(AFHTTPRequestOperation *operation, id JSON) {
+            NSMutableArray* htmlFragments = [[NSMutableArray alloc] init];
+            [htmlFragments addObject:@"<div style=\"font-family:'Helvetica Neue';\">"];
+            for (NSDictionary *status in JSON)
+            {
+                if ([(NSNumber*)[status objectForKey:@"id"] intValue] == story.storyId)
+                    [htmlFragments addObject:@"<p style=\"font-weight: bold;\">"];
+                else
+                    [htmlFragments addObject:@"<p>"];
+                [htmlFragments addObject:[status objectForKey:@"line"]];
+                [htmlFragments addObject:@"</p>"];
+                NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
+            }
+            [htmlFragments addObject:@"</div>"];
+            NSString* htmlString = [htmlFragments componentsJoinedByString: @""];
+            [webView loadHTMLString:htmlString baseURL:[NSURL URLWithString:@"http://storeys.clr3.com"]];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        }];
 }
 
 # pragma mark - Pull to refresh delegate

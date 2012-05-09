@@ -9,9 +9,8 @@
 #import "STLatestViewController.h"
 #import "STSingleStoryViewController.h"
 #import "STStory.h"
-#import "SBJson.h"
 #import "PullToRefreshView.h"
-#import "Constants.h"
+#import "AFStoreysClient.h"
 
 @interface STLatestViewController ()
 
@@ -158,28 +157,27 @@
 
 -(void) reloadTableData
 {
-    NSLog(@"Reloading Latest!!!");
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:StoreysURLLatest]];
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *json_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-    NSArray *statuses = [json_string JSONValue];
-    
-    NSMutableArray* new_latests = [NSMutableArray arrayWithCapacity:[statuses count]];
-    for (NSDictionary *status in statuses)
-    {
-        STStory *story = [[STStory alloc] init];
-        story.name = [status objectForKey:@"line"];
-        story.storyId = [(NSNumber*)[status objectForKey:@"id"] intValue];
-        story.text = @"";
-        story.rating = 4;
-        [new_latests addObject:story];
-        NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
-    }
-    
-    latests = new_latests;
-    [self.tableView reloadData];
-    [pull finishedLoading];
+    NSLog(@"Reloading Latest!");
+    [[AFStoreysClient sharedClient] getPath:@"storylines/latest.json" parameters:nil
+        success:^(AFHTTPRequestOperation *operation, id JSON) {
+            NSMutableArray* new_latests = [NSMutableArray arrayWithCapacity:[JSON count]];
+            for (NSDictionary *status in JSON) {
+                STStory *story = [[STStory alloc] init];
+                story.name = [status objectForKey:@"line"];
+                story.storyId = [(NSNumber*)[status objectForKey:@"id"] intValue];
+                story.text = @"";
+                story.rating = 4;
+                [new_latests addObject:story];
+                NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
+            }
+            latests = new_latests;
+            [self.tableView reloadData];
+            [pull finishedLoading];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+            [pull finishedLoading];
+        }];
 }
 
 @end

@@ -10,8 +10,7 @@
 #import "STSingleStoryViewController.h"
 #import "STStory.h"
 #import "PullToRefreshView.h"
-#import "Constants.h"
-#import "SBJson.h"
+#import "AFStoreysClient.h"
 
 @interface STStoriesViewController ()
 
@@ -124,11 +123,16 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue* )segue sender:(id)sender
 {
-    NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     if ([segue.identifier isEqualToString:@"StoriesToSingleStorySegue"]) {
         NSLog(@"Hello Worldy!");
+        NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
         STSingleStoryViewController* vc = [segue destinationViewController];
         vc.story = [self.stories objectAtIndex:indexPath.row];
+    }
+    else if ([segue.identifier isEqualToString:@"StoriesToNewStorySegue"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        STNewStoryViewController *newStoryViewController = [[navigationController viewControllers] objectAtIndex:0];
+        newStoryViewController.delegate = self;
     }
 }
 
@@ -154,26 +158,51 @@
 
 -(void) reloadTableData
 {
-    NSLog(@"Reloading!!!");
+    NSLog(@"Reloading Storylines!!!");
+    [[AFStoreysClient sharedClient] getPath:@"storylines.json" parameters:nil
+        success:^(AFHTTPRequestOperation *operation, id JSON) {
+            NSMutableArray* new_stories = [NSMutableArray arrayWithCapacity:[JSON count]];
+            for (NSDictionary *status in JSON) {
+                STStory *story = [[STStory alloc] init];
+                story.name = [status objectForKey:@"line"];
+                story.storyId = [(NSNumber*)[status objectForKey:@"id"] intValue];
+                story.text = @"";
+                story.rating = 4;
+                [new_stories addObject:story];
+                NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
+            }
+            stories = new_stories;
+            [self.tableView reloadData];
+            [pull finishedLoading];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+            [pull finishedLoading];
+    }];
+}
+
+#pragma mark - New Story delgate
+
+- (void) newStoryViewControllerDidCancel:
+(STNewStoryViewController*) controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) newStoryViewController:
+(STNewStoryViewController*) controller
+didAddStory:(STStory *)story
+{
+    // Add new story to tableView
+    [self.stories addObject:story];
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:[self.stories count]-1 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:StoreysURLRoots]];
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *json_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-    NSArray *statuses = [json_string JSONValue];
-    stories = [NSMutableArray arrayWithCapacity:[statuses count]];
-    for (NSDictionary *status in statuses)
-    {
-        STStory *story = [[STStory alloc] init];
-        story.name = [status objectForKey:@"line"];
-        story.storyId = [(NSNumber*)[status objectForKey:@"id"] intValue];
-        story.text = @"";
-        story.rating = 4;
-        [stories addObject:story];
-        NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
-    }
-    
-    [self.tableView reloadData];
-    [pull finishedLoading];
+    // Push SingleStory view after story creation
+    STSingleStoryViewController* singleStoryViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SingleStoryIdentifier"];
+    singleStoryViewController.story = story;
+    [self.navigationController pushViewController:singleStoryViewController animated:YES];
 }
 
 @end
