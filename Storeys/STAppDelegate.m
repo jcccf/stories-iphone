@@ -22,6 +22,19 @@
     UINavigationController *navigationController = [[tabBarController viewControllers] objectAtIndex:0];
     STStoriesViewController *storiesViewController = [[navigationController viewControllers] objectAtIndex:0];
     
+    // Set status bar to black
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
+    
+    // Set navigation bar colors
+    UINavigationBar* navigationBar = [UINavigationBar appearance];
+    UIImage *image = [UIImage imageNamed:@"NavBar.png"];
+    [navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    [navigationBar setTintColor:[UIColor colorWithRed:.682 green:.792 blue:.125 alpha:1]];
+    
+    // Set tab bar colors
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:.682 green:.792 blue:.125 alpha:1]];
+    
+    // Load table data
     [storiesViewController reloadTableData];
     
     return YES;

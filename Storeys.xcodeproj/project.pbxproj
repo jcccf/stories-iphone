@@ -59,6 +59,8 @@
 		109F28871559F08700F23F4E /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 109F287D1559F08700F23F4E /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		109F288B1559F14C00F23F4E /* AFStoreysClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 109F288A1559F14C00F23F4E /* AFStoreysClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		10EFE1761559DF87000FCEA1 /* STNewStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EFE1751559DF87000FCEA1 /* STNewStoryViewController.m */; settings = {COMPILER_FLAGS = ""; }; };
+		10F5B010155C8D11004A735A /* NavBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F5B00E155C8D11004A735A /* NavBar.png */; };
+		10F5B011155C8D11004A735A /* NavBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10F5B00F155C8D11004A735A /* NavBar@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +163,8 @@
 		109F288A1559F14C00F23F4E /* AFStoreysClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFStoreysClient.m; sourceTree = "<group>"; };
 		10EFE1741559DF87000FCEA1 /* STNewStoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNewStoryViewController.h; sourceTree = "<group>"; };
 		10EFE1751559DF87000FCEA1 /* STNewStoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNewStoryViewController.m; sourceTree = "<group>"; };
+		10F5B00E155C8D11004A735A /* NavBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBar.png; sourceTree = "<group>"; };
+		10F5B00F155C8D11004A735A /* NavBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBar@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +242,7 @@
 				109F28891559F14C00F23F4E /* AFStoreysClient.h */,
 				109F288A1559F14C00F23F4E /* AFStoreysClient.m */,
 				10622DED155896E000FDE8FD /* MainStoryboard.storyboard */,
+				10F5B012155C8D18004A735A /* Textures */,
 				1091CB8315597189005BF9CE /* Icons */,
 				109F28681559F08700F23F4E /* AFNetworking */,
 				10622E491558B41300FDE8FD /* PullToRefreshView */,
@@ -363,6 +368,16 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		10F5B012155C8D18004A735A /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				10F5B00E155C8D11004A735A /* NavBar.png */,
+				10F5B00F155C8D11004A735A /* NavBar@2x.png */,
+			);
+			name = Textures;
+			path = ..;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -447,6 +462,8 @@
 				1091CB8C1559B609005BF9CE /* Icon@2x.png in Resources */,
 				1091CB921559B82E005BF9CE /* Default.png in Resources */,
 				1091CB941559B835005BF9CE /* Default@2x.png in Resources */,
+				10F5B010155C8D11004A735A /* NavBar.png in Resources */,
+				10F5B011155C8D11004A735A /* NavBar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
