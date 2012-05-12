@@ -105,23 +105,25 @@
 - (void)webViewDidFinishLoad:(UIWebView *)wv
 {
     [(PullToRefreshView *)[self.view viewWithTag:998] finishedLoading];
+    [wv stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none'; document.body.style.KhtmlUserSelect='none'"]; // Disable long touches
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     // Intercept fake links and open the appropriate views
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
-        //[[[UIAlertView alloc] initWithTitle:@"Error" message:[[request URL] lastPathComponent] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
-        STNewStoryViewController* newStoryViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStoryIdentifier"];
-        newStoryViewController.delegate = self;
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newStoryViewController];
-        [newStoryViewController setTitle:@"Continue Story"];
-        [self presentModalViewController:navigationController animated:YES];
-        return NO;
+        NSString* action = [[request URL] lastPathComponent];
+        if ([action isEqualToString:@"continueStory"]) {
+            STNewStoryViewController* newStoryViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStoryIdentifier"];
+            newStoryViewController.delegate = self;
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newStoryViewController];
+            [newStoryViewController setTitle:@"Continue Story"];
+            [self presentModalViewController:navigationController animated:YES];
+            return NO;
+        }
+        return YES;
     }
-    else {
-        return YES;        
-    }
+    return YES;
 }
 
 #pragma mark - New Story delgate
