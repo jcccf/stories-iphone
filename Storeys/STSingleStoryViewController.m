@@ -69,7 +69,7 @@
 
 - (void) reloadStory
 {
-    NSLog(@"Reloading Story!");
+    DLog(@"Reloading Story!");
     [[AFStoreysClient sharedClient] getPath:StoreysURLRandomStory(story.storyId) parameters:nil
         success:^(AFHTTPRequestOperation *operation, id JSON) {
             NSMutableArray* htmlFragments = [[NSMutableArray alloc] init];
@@ -84,14 +84,15 @@
                     [htmlFragments addObject:@"<p>"];
                 [htmlFragments addObject:[status objectForKey:@"line"]];
                 [htmlFragments addObject:@"</p>"];
-                NSLog(@"Line - %@", [status objectForKey:@"line"]);
+                DLog(@"Line - %@", [status objectForKey:@"line"]);
             }
-            [htmlFragments addObject:@"<div class=\"link_wrapper\"><a href=\"http://storeys.clr3.com/continueStory\" class=\"link\">Continue</a></div>"];
+            int lastId = [(NSNumber*)[[JSON objectAtIndex:[JSON count]-1] objectForKey:@"id"] intValue];
+            [htmlFragments addObject:[NSString stringWithFormat:@"<div class=\"link_wrapper\"><a href=\"http://storeys.clr3.com/continueStory?%d\" class=\"link\">Continue</a></div>", lastId]];
                         [htmlFragments addObject:@"</body></html>"];
             NSString* htmlString = [htmlFragments componentsJoinedByString: @""];
             [webView loadHTMLString:htmlString baseURL:[NSURL URLWithString:@"http://storeys.clr3.com"]];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
+            DLog(@"Error: %@", error);
             [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
         }];
 }
@@ -114,9 +115,13 @@
     // Intercept fake links and open the appropriate views
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         NSString* action = [[request URL] lastPathComponent];
+        int prevId = [[[request URL] query] intValue];
         if ([action isEqualToString:@"continueStory"]) {
             STNewStoryViewController* newStoryViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStoryIdentifier"];
             newStoryViewController.delegate = self;
+            STStory* newStory = [[STStory alloc] init];
+            newStory.prevId = prevId;
+            newStoryViewController.story = newStory;
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newStoryViewController];
             [newStoryViewController setTitle:@"Continue Story"];
             [self presentModalViewController:navigationController animated:YES];
@@ -134,9 +139,11 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void) newStoryViewController:(STNewStoryViewController*) controller didAddStory:(STStory *)story
+- (void) newStoryViewController:(STNewStoryViewController*) controller didAddStory:(STStory *)newStory
 {
     [self dismissModalViewControllerAnimated:YES];
+    self.story = newStory;
+    [self reloadStory];
 }
 
 @end

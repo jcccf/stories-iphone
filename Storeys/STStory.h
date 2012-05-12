@@ -14,5 +14,7 @@
 @property (nonatomic, copy) NSString* text;
 @property (nonatomic, assign) int rating;
 @property (nonatomic, assign) int storyId;
+@property (nonatomic, assign) int prevId;
+@property (nonatomic, assign) int nextId;
 
 @end

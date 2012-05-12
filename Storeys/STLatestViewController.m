@@ -129,7 +129,7 @@
 {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     if ([segue.identifier isEqualToString:@"LatestToSingleStorySegue"]) {
-        NSLog(@"Seguing from Latest to SingleStory!");
+        DLog(@"Seguing from Latest to SingleStory!");
         STSingleStoryViewController* vc = [segue destinationViewController];
         vc.story = [self.latests objectAtIndex:indexPath.row];
     }
@@ -168,13 +168,13 @@
                 story.text = @"";
                 story.rating = 4;
                 [new_latests addObject:story];
-                NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
+                DLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
             }
             latests = new_latests;
             [self.tableView reloadData];
             [pull finishedLoading];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
+            DLog(@"Error: %@", error);
             [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
             [pull finishedLoading];
         }];

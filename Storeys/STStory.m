@@ -14,5 +14,18 @@
 @synthesize text;
 @synthesize rating;
 @synthesize storyId;
+@synthesize prevId;
+@synthesize nextId;
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.prevId = -1;
+        self.nextId = -1;
+        self.rating = -1;
+    }
+    return self;
+}
 
 @end

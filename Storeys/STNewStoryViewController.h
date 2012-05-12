@@ -27,6 +27,8 @@ didAddStory:(STStory*)story;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
+@property (strong, nonatomic) STStory *story;
+
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;
 

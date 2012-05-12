@@ -20,12 +20,12 @@
 @synthesize storyTextView;
 @synthesize doneButton;
 @synthesize cancelButton;
+@synthesize story;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -83,18 +83,24 @@
     [doneButton setEnabled:NO];
     [cancelButton setEnabled:NO];
     
+    // Generate Dictionary
+    NSMutableDictionary* dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:self.storyTextView.text forKey:@"storyline[line]"];
+    if (story != nil && story.prevId >= 0)
+        [dictionary setObject:[[NSNumber alloc] initWithInt:story.prevId] forKey:@"storyline[prev]"];
+    
     // Request to create a new story
-    [[AFStoreysClient sharedClient] postPath:@"storylines.json" parameters:[NSDictionary dictionaryWithObject:self.storyTextView.text forKey:@"storyline[line]"]
+    [[AFStoreysClient sharedClient] postPath:@"storylines.json" parameters:dictionary
         success:^(AFHTTPRequestOperation *operation, id JSON) {
             for (NSDictionary *attributes in JSON) {
-                NSLog(@"AF Result - %@ %@", [attributes objectForKey:@"line"], [attributes objectForKey:@"id"]);
-                STStory *story = [[STStory alloc] init];
-                story.name = [attributes objectForKey:@"line"];
-                story.storyId = [(NSNumber*)[attributes objectForKey:@"id"] intValue];
-                [self.delegate newStoryViewController:self didAddStory:story];
+                DLog(@"AF Result - %@ %@", [attributes objectForKey:@"line"], [attributes objectForKey:@"id"]);
+                STStory *newStory = [[STStory alloc] init];
+                newStory.name = [attributes objectForKey:@"line"];
+                newStory.storyId = [(NSNumber*)[attributes objectForKey:@"id"] intValue];
+                [self.delegate newStoryViewController:self didAddStory:newStory];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
+            DLog(@"Error: %@", error);
             [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
             [doneButton setEnabled:YES];
             [cancelButton setEnabled:YES];

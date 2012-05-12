@@ -124,7 +124,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue* )segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"StoriesToSingleStorySegue"]) {
-        NSLog(@"Hello Worldy!");
         NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
         STSingleStoryViewController* vc = [segue destinationViewController];
         vc.story = [self.stories objectAtIndex:indexPath.row];
@@ -158,7 +157,7 @@
 
 -(void) reloadTableData
 {
-    NSLog(@"Reloading Storylines!!!");
+    DLog(@"Reloading Storylines!!!");
     [[AFStoreysClient sharedClient] getPath:@"storylines.json" parameters:nil
         success:^(AFHTTPRequestOperation *operation, id JSON) {
             NSMutableArray* new_stories = [NSMutableArray arrayWithCapacity:[JSON count]];
@@ -169,13 +168,13 @@
                 story.text = @"";
                 story.rating = 4;
                 [new_stories addObject:story];
-                NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
+                DLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
             }
             stories = new_stories;
             [self.tableView reloadData];
             [pull finishedLoading];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
+            DLog(@"Error: %@", error);
             [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
             [pull finishedLoading];
     }];
