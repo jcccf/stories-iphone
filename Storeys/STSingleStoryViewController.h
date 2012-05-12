@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "STNewStoryViewController.h"
 @class STStory;
 
-@interface STSingleStoryViewController : UIViewController
+@interface STSingleStoryViewController : UIViewController <UIWebViewDelegate, STNewStoryViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIWebView* webView;
 

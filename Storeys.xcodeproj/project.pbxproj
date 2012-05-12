@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		100DF489155DA06600195D22 /* Background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 100DF488155DA06600195D22 /* Background.jpg */; };
 		10622DDC155896E000FDE8FD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10622DDB155896E000FDE8FD /* UIKit.framework */; };
 		10622DDE155896E000FDE8FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10622DDD155896E000FDE8FD /* Foundation.framework */; };
 		10622DE0155896E000FDE8FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10622DDF155896E000FDE8FD /* CoreGraphics.framework */; };
@@ -74,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		100DF488155DA06600195D22 /* Background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Background.jpg; sourceTree = "<group>"; };
 		10622DD7155896E000FDE8FD /* Storeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Storeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10622DDB155896E000FDE8FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		10622DDD155896E000FDE8FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -371,6 +373,7 @@
 		10F5B012155C8D18004A735A /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				100DF488155DA06600195D22 /* Background.jpg */,
 				10F5B00E155C8D11004A735A /* NavBar.png */,
 				10F5B00F155C8D11004A735A /* NavBar@2x.png */,
 			);
@@ -464,6 +467,7 @@
 				1091CB941559B835005BF9CE /* Default@2x.png in Resources */,
 				10F5B010155C8D11004A735A /* NavBar.png in Resources */,
 				10F5B011155C8D11004A735A /* NavBar@2x.png in Resources */,
+				100DF489155DA06600195D22 /* Background.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

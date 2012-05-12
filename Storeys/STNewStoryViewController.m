@@ -33,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Background.jpg"]];
     [self.storyTextView becomeFirstResponder];
 
     // Uncomment the following line to preserve selection between presentations.

@@ -11,6 +11,7 @@
 #import "PullToRefreshView.h"
 #import "AFStoreysClient.h"
 #import "Constants.h"
+#import "STNewStoryViewController.h"
 
 @interface STSingleStoryViewController ()
 
@@ -36,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [webView setBackgroundColor:[UIColor colorWithRed:0.972 green:0.957 blue:0.945 alpha:1.0]];
 
     // Pull to refresh
     [webView setDelegate:(id)self];
@@ -71,7 +73,8 @@
     [[AFStoreysClient sharedClient] getPath:StoreysURLRandomStory(story.storyId) parameters:nil
         success:^(AFHTTPRequestOperation *operation, id JSON) {
             NSMutableArray* htmlFragments = [[NSMutableArray alloc] init];
-            [htmlFragments addObject:@"<div style=\"font-family:'Helvetica Neue';\">"];
+            [htmlFragments addObject:@"<html><head><style>* { font-family:'Helvetica Neue' } a { font-size: larger; font-weight: bold; text-decoration: None; } div.link { text-align: center; border-radius: 4px; background-color: #f0f0f0; padding: 4px; }</style></head>"];
+            [htmlFragments addObject:@"<body>"];
             for (NSDictionary *status in JSON)
             {
                 if ([(NSNumber*)[status objectForKey:@"id"] intValue] == story.storyId)
@@ -80,9 +83,10 @@
                     [htmlFragments addObject:@"<p>"];
                 [htmlFragments addObject:[status objectForKey:@"line"]];
                 [htmlFragments addObject:@"</p>"];
-                NSLog(@"Line - %@ %d", [status objectForKey:@"line"], story.storyId);
+                NSLog(@"Line - %@", [status objectForKey:@"line"]);
             }
-            [htmlFragments addObject:@"</div>"];
+            [htmlFragments addObject:@"<a href=\"http://storeys.clr3.com/continueStory\"><div class=\"link\">Continue</div></a>"];
+                        [htmlFragments addObject:@"</body></html>"];
             NSString* htmlString = [htmlFragments componentsJoinedByString: @""];
             [webView loadHTMLString:htmlString baseURL:[NSURL URLWithString:@"http://storeys.clr3.com"]];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -101,6 +105,35 @@
 - (void)webViewDidFinishLoad:(UIWebView *)wv
 {
     [(PullToRefreshView *)[self.view viewWithTag:998] finishedLoading];
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    // Intercept fake links and open the appropriate views
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        //[[[UIAlertView alloc] initWithTitle:@"Error" message:[[request URL] lastPathComponent] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        STNewStoryViewController* newStoryViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStoryIdentifier"];
+        newStoryViewController.delegate = self;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newStoryViewController];
+        [newStoryViewController setTitle:@"Continue Story"];
+        [self presentModalViewController:navigationController animated:YES];
+        return NO;
+    }
+    else {
+        return YES;        
+    }
+}
+
+#pragma mark - New Story delgate
+
+- (void) newStoryViewControllerDidCancel:(STNewStoryViewController*) controller
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void) newStoryViewController:(STNewStoryViewController*) controller didAddStory:(STStory *)story
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
