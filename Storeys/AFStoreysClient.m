@@ -7,7 +7,7 @@
 //
 
 #import "AFStoreysClient.h"
-#import "AFNetworking/AFJSONRequestOperation.h"
+#import "AFJSONRequestOperation.h"
 
 //static NSString* const kAFStoreysBaseURLString = @"http://localhost:3000/";
 static NSString* const kAFStoreysBaseURLString = @"http://storeys.clr3.com/";

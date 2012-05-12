@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 colorforest. All rights reserved.
 //
 
-#import "AFNetworking/AFHTTPClient.h"
+#import "AFHTTPClient.h"
 
 @interface AFStoreysClient : AFHTTPClient
 

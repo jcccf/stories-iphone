@@ -73,8 +73,9 @@
     [[AFStoreysClient sharedClient] getPath:StoreysURLRandomStory(story.storyId) parameters:nil
         success:^(AFHTTPRequestOperation *operation, id JSON) {
             NSMutableArray* htmlFragments = [[NSMutableArray alloc] init];
-            [htmlFragments addObject:@"<html><head><style>* { font-family:'Helvetica Neue' } a { font-size: larger; font-weight: bold; text-decoration: None; } div.link { text-align: center; border-radius: 4px; background-color: #f0f0f0; padding: 4px; }</style></head>"];
-            [htmlFragments addObject:@"<body>"];
+            NSError* error;
+            NSString* storyTop = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NewStoryTop" ofType:@"html"] encoding:NSUTF8StringEncoding error:&error];
+            [htmlFragments addObject:storyTop];
             for (NSDictionary *status in JSON)
             {
                 if ([(NSNumber*)[status objectForKey:@"id"] intValue] == story.storyId)
@@ -85,7 +86,7 @@
                 [htmlFragments addObject:@"</p>"];
                 NSLog(@"Line - %@", [status objectForKey:@"line"]);
             }
-            [htmlFragments addObject:@"<a href=\"http://storeys.clr3.com/continueStory\"><div class=\"link\">Continue</div></a>"];
+            [htmlFragments addObject:@"<div class=\"link_wrapper\"><a href=\"http://storeys.clr3.com/continueStory\" class=\"link\">Continue</a></div>"];
                         [htmlFragments addObject:@"</body></html>"];
             NSString* htmlString = [htmlFragments componentsJoinedByString: @""];
             [webView loadHTMLString:htmlString baseURL:[NSURL URLWithString:@"http://storeys.clr3.com"]];
