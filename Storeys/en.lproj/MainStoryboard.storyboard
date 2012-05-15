@@ -6,6 +6,42 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
+        <!--Single Story Table View Controller - Story-->
+        <scene sceneID="uAU-di-GiG">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oUK-ax-rIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="BDU-4W-QIR" customClass="STSingleStoryTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="f6w-bA-nj4">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RegularCell" id="ALa-Q2-vdI">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BDU-4W-QIR" id="MEb-7U-rhR"/>
+                            <outlet property="delegate" destination="BDU-4W-QIR" id="RLS-Pg-HFp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Story" id="PNc-qI-YSl">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Nsg-Zu-31e">
+                            <connections>
+                                <action selector="add:" destination="BDU-4W-QIR" id="VLN-ro-Sr9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1834" y="-233"/>
+        </scene>
         <!--Stories View Controller - Stories-->
         <scene sceneID="zoe-jF-iJH">
             <objects>
@@ -41,7 +77,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="Y1s-Tp-ZfF" kind="push" identifier="StoriesToSingleStorySegue" id="BDp-a7-OBz"/>
+                                    <segue destination="BDU-4W-QIR" kind="push" identifier="StoriesToSingleStorySegue" id="B4Q-y5-EAG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -51,7 +87,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Stories" id="SPo-S8-agM">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="H1O-9q-tcn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="H1O-9q-tcn">
                             <connections>
                                 <segue destination="qyf-PQ-5bi" kind="modal" identifier="StoriesToNewStorySegue" id="YOM-Kv-a0D"/>
                             </connections>
@@ -116,7 +152,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2315" y="-809"/>
+            <point key="canvasLocation" x="2315" y="-827"/>
         </scene>
         <!--Single Story View Controller - Story-->
         <scene sceneID="5LT-vS-F5W">
@@ -141,7 +177,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1789" y="-232"/>
+            <point key="canvasLocation" x="1834" y="344"/>
         </scene>
         <!--Latest View Controller - Latest-->
         <scene sceneID="GV3-BR-CM1">
@@ -265,43 +301,16 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1789" y="-809"/>
+            <point key="canvasLocation" x="1834" y="-827"/>
         </scene>
     </scenes>
     <resources>
         <image name="64-zap.png" width="12" height="24"/>
         <image name="96-book.png" width="18" height="26"/>
     </resources>
-    <classes>
-        <class className="STLatestViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STLatestViewController.h"/>
-        </class>
-        <class className="STNewStoryViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STNewStoryViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="storyTextView" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="STSingleStoryViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STSingleStoryViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="STStoriesViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/STStoriesViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="8iY-OF-saf"/>
-    </inferredMetricsTieBreakers>
 </document>

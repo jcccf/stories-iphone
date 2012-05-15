@@ -129,7 +129,8 @@
     [formatter setAMSymbol:@"AM"];
     [formatter setPMSymbol:@"PM"];
     [formatter setDateFormat:@"MM/dd/yy hh:mm a"];
-    lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [formatter stringFromDate:date]];
+    // lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [formatter stringFromDate:date]];
+    lastUpdatedLabel.text = @"";
 }
 
 - (void)setState:(PullToRefreshViewState)state_ {
@@ -137,14 +138,14 @@
     
 	switch (state) {
 		case PullToRefreshViewStateReady:
-			statusLabel.text = @"Release to refresh...";
+			statusLabel.text = @"Release to continue story...";
 			[self showActivity:NO animated:NO];
             [self setImageFlipped:NO];
             scrollView.contentInset = UIEdgeInsetsZero;
 			break;
             
 		case PullToRefreshViewStateNormal:
-			statusLabel.text = @"Pull up to refresh...";
+			statusLabel.text = @"Pull up to continue story...";
 			[self showActivity:NO animated:NO];
             [self setImageFlipped:YES];
 			[self refreshLastUpdatedDate];
@@ -175,13 +176,13 @@
             self.frame = frame;
             
             if (state == PullToRefreshViewStateReady) {
-                if (scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height  && scrollView.contentOffset.y < scrollView.contentSize.height - scrollView.frame.size.height + 65.0f) 
+                if (scrollView.contentOffset.y > MAX(scrollView.contentSize.height, scrollView.frame.size.height) - scrollView.frame.size.height  && scrollView.contentOffset.y < MAX(scrollView.contentSize.height, scrollView.frame.size.height) - scrollView.frame.size.height + 65.0f) 
                     [self setState:PullToRefreshViewStateNormal];
             } else if (state == PullToRefreshViewStateNormal) {
-                if (scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height +65.0f)
+                if (scrollView.contentOffset.y > MAX(scrollView.contentSize.height, scrollView.frame.size.height) - scrollView.frame.size.height + 65.0f)
                     [self setState:PullToRefreshViewStateReady];
             } else if (state == PullToRefreshViewStateLoading) {
-                if (scrollView.contentOffset.y <= scrollView.contentSize.height - scrollView.frame.size.height)
+                if (scrollView.contentOffset.y <= MAX(scrollView.contentSize.height, scrollView.frame.size.height) - scrollView.frame.size.height)
                     scrollView.contentInset = UIEdgeInsetsZero;
                 else
                     scrollView.contentInset = UIEdgeInsetsMake(0, 0, MAX(-scrollView.contentOffset.y, 60.0f), 0);

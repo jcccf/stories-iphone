@@ -8,9 +8,9 @@
 
 #import "STStoriesViewController.h"
 #import "STSingleStoryViewController.h"
+#import "STSingleStoryTableViewController.h"
 #import "STStory.h"
 #import "PullToRefreshView.h"
-#import "PullToRefreshViewBottom.h"
 #import "AFStoreysClient.h"
 
 @interface STStoriesViewController ()
@@ -19,7 +19,6 @@
 
 @implementation STStoriesViewController {
     PullToRefreshView* pull;
-    PullToRefreshViewBottom* pullBottom;
 }
 
 @synthesize stories;
@@ -45,9 +44,6 @@
     pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [pull setDelegate:(id)self];
     [self.tableView addSubview:pull];
-    pullBottom = [[PullToRefreshViewBottom alloc] initWithScrollView:(UIScrollView *) self.tableView];
-    [pullBottom setDelegate:(id)self];
-    [self.tableView addSubview:pullBottom];
 }
 
 - (void)viewDidUnload
@@ -130,7 +126,7 @@
 {
     if ([segue.identifier isEqualToString:@"StoriesToSingleStorySegue"]) {
         NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
-        STSingleStoryViewController* vc = [segue destinationViewController];
+        STSingleStoryTableViewController* vc = [segue destinationViewController];
         vc.story = [self.stories objectAtIndex:indexPath.row];
     }
     else if ([segue.identifier isEqualToString:@"StoriesToNewStorySegue"]) {
@@ -183,12 +179,6 @@
             [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
             [pull finishedLoading];
     }];
-}
-
-- (void)pullToRefreshViewBottomShouldRefresh:(PullToRefreshView *)view
-{
-    DLog(@"Bottom Refresh!");
-    [pullBottom finishedLoading];
 }
 
 #pragma mark - New Story delgate

@@ -16,5 +16,6 @@
 @property (nonatomic, assign) int storyId;
 @property (nonatomic, assign) int prevId;
 @property (nonatomic, assign) int nextId;
+@property (nonatomic, assign) bool isSelected;
 
 @end

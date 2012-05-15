@@ -16,6 +16,7 @@
 @synthesize storyId;
 @synthesize prevId;
 @synthesize nextId;
+@synthesize isSelected;
 
 - (id)init
 {
@@ -24,6 +25,7 @@
         self.prevId = -1;
         self.nextId = -1;
         self.rating = -1;
+        self.isSelected = NO;
     }
     return self;
 }
