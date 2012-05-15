@@ -39,6 +39,7 @@
 		10622E441558B1B000FDE8FD /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10622E401558B1B000FDE8FD /* arrow@2x.png */; };
 		10622E451558B1B000FDE8FD /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10622E421558B1B000FDE8FD /* PullToRefreshView.m */; };
 		10622E481558B26500FDE8FD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10622E471558B26400FDE8FD /* QuartzCore.framework */; };
+		1086F3FF1562AE0F002B14E7 /* PullToRefreshViewBottom.m in Sources */ = {isa = PBXBuildFile; fileRef = 1086F3FE1562AE0F002B14E7 /* PullToRefreshViewBottom.m */; };
 		108EFA68155EB66E00E2A446 /* NewStoryTop.html in Resources */ = {isa = PBXBuildFile; fileRef = 108EFA67155EB66E00E2A446 /* NewStoryTop.html */; };
 		1091CB7915596EEC005BF9CE /* STLatestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1091CB7815596EEC005BF9CE /* STLatestViewController.m */; settings = {COMPILER_FLAGS = ""; }; };
 		1091CB7F1559717D005BF9CE /* 64-zap.png in Resources */ = {isa = PBXBuildFile; fileRef = 1091CB7B1559717C005BF9CE /* 64-zap.png */; };
@@ -130,6 +131,8 @@
 		10622E411558B1B000FDE8FD /* PullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PullToRefreshView.h; path = PullToRefreshView/PullToRefreshView.h; sourceTree = "<group>"; };
 		10622E421558B1B000FDE8FD /* PullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PullToRefreshView.m; path = PullToRefreshView/PullToRefreshView.m; sourceTree = "<group>"; };
 		10622E471558B26400FDE8FD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1086F3FD1562AE0F002B14E7 /* PullToRefreshViewBottom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PullToRefreshViewBottom.h; path = PullToRefreshView/PullToRefreshViewBottom.h; sourceTree = "<group>"; };
+		1086F3FE1562AE0F002B14E7 /* PullToRefreshViewBottom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PullToRefreshViewBottom.m; path = PullToRefreshView/PullToRefreshViewBottom.m; sourceTree = "<group>"; };
 		108EFA67155EB66E00E2A446 /* NewStoryTop.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = NewStoryTop.html; sourceTree = "<group>"; };
 		1091CB7715596EEB005BF9CE /* STLatestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLatestViewController.h; sourceTree = "<group>"; };
 		1091CB7815596EEC005BF9CE /* STLatestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLatestViewController.m; sourceTree = "<group>"; };
@@ -324,6 +327,8 @@
 			children = (
 				10622E3F1558B1B000FDE8FD /* arrow.png */,
 				10622E401558B1B000FDE8FD /* arrow@2x.png */,
+				1086F3FD1562AE0F002B14E7 /* PullToRefreshViewBottom.h */,
+				1086F3FE1562AE0F002B14E7 /* PullToRefreshViewBottom.m */,
 				10622E411558B1B000FDE8FD /* PullToRefreshView.h */,
 				10622E421558B1B000FDE8FD /* PullToRefreshView.m */,
 			);
@@ -545,6 +550,7 @@
 				109F28861559F08700F23F4E /* AFXMLRequestOperation.m in Sources */,
 				109F28871559F08700F23F4E /* UIImageView+AFNetworking.m in Sources */,
 				109F288B1559F14C00F23F4E /* AFStoreysClient.m in Sources */,
+				1086F3FF1562AE0F002B14E7 /* PullToRefreshViewBottom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
